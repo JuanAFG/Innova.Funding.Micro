@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnovaFunding.Functions", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnovaFunding.Functions.UnitTesting", "InnovaFunding.Functions.UnitTesting\InnovaFunding.Functions.UnitTesting.csproj", "{6751A088-D2B9-64BA-C79D-521FBF27BC6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnovaFunding.Functions.IntegrationTest", "InnovaFunding.Functions.IntegrationTest\InnovaFunding.Functions.IntegrationTest.csproj", "{8062DF67-5F36-2458-8E8C-9EE03BEF6DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6751A088-D2B9-64BA-C79D-521FBF27BC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6751A088-D2B9-64BA-C79D-521FBF27BC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6751A088-D2B9-64BA-C79D-521FBF27BC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8062DF67-5F36-2458-8E8C-9EE03BEF6DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8062DF67-5F36-2458-8E8C-9EE03BEF6DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8062DF67-5F36-2458-8E8C-9EE03BEF6DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8062DF67-5F36-2458-8E8C-9EE03BEF6DC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

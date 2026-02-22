@@ -1,5 +1,6 @@
 ﻿using InnovaFunding.Functions.Contract;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 
 
@@ -7,21 +8,22 @@ namespace InnovaFunding.Functions.Service
 {
     public class SqlDatabaseService : IDatabaseService
     {
-        private readonly string _connectionString;
-
-        public SqlDatabaseService(string connectionString)
+        private readonly IConfiguration _configuration;
+        public SqlDatabaseService(IConfiguration configuration)
         {
-            _connectionString = connectionString;
+            _configuration = configuration;
         }
+
 
         public async Task<(double? PriceSales, double? PricePurchase)> GetYesterdayRateAsync(string date)
         {
+            string _connectionString = _configuration.GetValue<string>("ConnectionStrings:InnovaFundingDb");
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
             var query = @"SELECT PriceSales, Pricepurchase 
-                      FROM SunatExchangeRate 
-                      WHERE DatePublic = @DatePublic";
+                  FROM SunatExchangeRate 
+                  WHERE DatePublic = @DatePublic";
 
             using var command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DatePublic", date);
@@ -37,12 +39,13 @@ namespace InnovaFunding.Functions.Service
 
         public async Task InsertRateAsync(string datePublic, double? priceSales, double? pricePurchase)
         {
+            string _connectionString = _configuration.GetValue<string>("ConnectionStrings:InnovaFundingDb");
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
             var query = @"INSERT INTO [dbo].[SunatExchangeRate]
-                      (DatePublic, PriceSales, Pricepurchase, CreatedDate, ModifiedDate)
-                      VALUES (@DatePublic, @PriceSales, @Pricepurchase, @CreatedDate, @ModifiedDate)";
+                  (DatePublic, PriceSales, Pricepurchase, CreatedDate, ModifiedDate)
+                  VALUES (@DatePublic, @PriceSales, @Pricepurchase, @CreatedDate, @ModifiedDate)";
 
             using var command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DatePublic", datePublic);
@@ -56,6 +59,7 @@ namespace InnovaFunding.Functions.Service
 
         public async Task LogErrorAsync(string message, string stackTrace)
         {
+            string _connectionString = _configuration.GetValue<string>("ConnectionStrings:InnovaFundingDb");
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
@@ -69,3 +73,4 @@ namespace InnovaFunding.Functions.Service
         }
     }
 }
+

@@ -11,9 +11,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-
 namespace InnovaFunding.Functions.UnitTesting;
-
 public class FlowServiceSunatUnitTest
 {
     private readonly string _url = "https://e-consulta.sunat.gob.pe/cl-at-ittipcam/tcS01Alias/listarTipoCambio";

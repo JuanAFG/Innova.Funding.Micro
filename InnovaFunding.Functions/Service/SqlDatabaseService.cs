@@ -14,7 +14,6 @@ namespace InnovaFunding.Functions.Service
             _configuration = configuration;
         }
 
-
         public async Task<(double? PriceSales, double? PricePurchase)> GetYesterdayRateAsync(string date)
         {
             string _connectionString = _configuration.GetValue<string>("ConnectionStrings:InnovaFundingDb");

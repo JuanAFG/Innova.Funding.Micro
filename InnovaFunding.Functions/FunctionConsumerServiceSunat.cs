@@ -18,7 +18,7 @@ public class FunctionConsumerServiceSunat
 
     [Function(nameof(FunctionConsumerServiceSunat))]
     public async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
         FunctionContext context)
     {
         var httpClient = new HttpClient();

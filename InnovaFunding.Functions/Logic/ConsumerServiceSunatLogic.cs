@@ -1,11 +1,7 @@
 ﻿using InnovaFunding.Functions.Contract;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace InnovaFunding.Functions.Logic
 {
@@ -28,8 +24,6 @@ namespace InnovaFunding.Functions.Logic
         }
         public async Task InsertTipoCambioAsync()
         {
-
-
             try
             {
                 var payload = new

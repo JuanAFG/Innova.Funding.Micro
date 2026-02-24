@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -32,3 +32,31 @@ jobs:
       run: dotnet test InnovaFunding.Functions.IntegrationTest/ --no-build --configuration Release
       env:
         ConnectionStrings__InnovaFundingDb: ${{ secrets.INNOVA_DB_CONNECTION }}
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Publish project
+      run: dotnet publish InnovaFunding.Functions/InnovaFunding.Functions.csproj -c Release -o ./publish
+
+    - name: Deploy to Azure Functions
+      uses: azure/functions-action@v1
+      with:
+        app-name: ${{ secrets.AZURE_FUNCTIONAPP_NAME }}
+        package: ./publish

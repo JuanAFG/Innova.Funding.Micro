@@ -31,7 +31,7 @@ jobs:
     - name: Run Integration Tests
       run: dotnet test InnovaFunding.Functions.IntegrationTest/ --no-build --configuration Release
       env:
-        ConnectionStrings__InnovaFundingDb: ${{ secrets.INNOVA_DB_CONNECTION }}
+        ConnectionStrings__InnovaFundingDb: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
 
   deploy:
     needs: build-and-test

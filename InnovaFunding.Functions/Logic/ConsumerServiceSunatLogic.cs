@@ -28,8 +28,8 @@ namespace InnovaFunding.Functions.Logic
             {
                 var payload = new
                 {
-                    anio = 2026,
-                    mes = 1,
+                    anio = DateTime.Now.Year,
+                    mes = DateTime.Now.Month-1,
                     token = Guid.NewGuid().ToString("N")
                 };
 

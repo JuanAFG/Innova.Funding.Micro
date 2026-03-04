@@ -28,7 +28,7 @@ public class FunctionConsumerServiceSunat
         await scraper.InsertTipoCambioAsync();
 
         var response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteStringAsync("Tipo de cambio insertado correctamente.");
+        await response.WriteStringAsync($"[{DateTime.Now}] Tipo de cambio insertado correctamente.");
 
         _logger.LogInformation("HTTP trigger ejecutado correctamente.");
         return response;

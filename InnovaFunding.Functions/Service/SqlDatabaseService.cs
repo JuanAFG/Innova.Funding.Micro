@@ -16,7 +16,7 @@ namespace InnovaFunding.Functions.Service
 
         public async Task<(double? PriceSales, double? PricePurchase)> GetYesterdayRateAsync(string date)
         {
-            string _connectionString = _configuration.GetConnectionString("InnovaFundingDb");
+            string _connectionString = _configuration.GetConnectionString("AzureConnection");
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
@@ -38,16 +38,13 @@ namespace InnovaFunding.Functions.Service
 
         public async Task InsertRateAsync(string datePublic, double? priceSales, double? pricePurchase)
         {
-            string _connectionString = _configuration.GetConnectionString("InnovaFundingDb");
+            string _connectionString = _configuration.GetConnectionString("AzureConnection");
 
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var query = @"INSERT INTO [dbo].[SunatExchangeRate]
-                  (DatePublic, PriceSales, Pricepurchase, CreatedDate, ModifiedDate)
-                  VALUES (@DatePublic, @PriceSales, @Pricepurchase, @CreatedDate, @ModifiedDate)";
-
-            using var command = new SqlCommand(query, connection);
+            using var command = new SqlCommand("Up_InsertSunatExchangeRate", connection);
+            command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@DatePublic", datePublic);
             command.Parameters.AddWithValue("@PriceSales", priceSales ?? 0);
             command.Parameters.AddWithValue("@Pricepurchase", pricePurchase ?? 0);
@@ -59,7 +56,7 @@ namespace InnovaFunding.Functions.Service
 
         public async Task LogErrorAsync(string message, string stackTrace)
         {
-            string _connectionString = _configuration.GetConnectionString("InnovaFundingDb");
+            string _connectionString = _configuration.GetConnectionString("AzureConnection");
 
             using var connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();

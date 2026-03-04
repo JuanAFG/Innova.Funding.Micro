@@ -24,10 +24,14 @@ namespace InnovaFunding.Functions.IntegrationTest
         private string GetConnectionString()
         {
             var configuration = BuildConfiguration();
-            var conn = configuration.GetConnectionString("InnovaFundingDb");
+            var conn = configuration.GetConnectionString("AzureConnection");
 
             if (string.IsNullOrEmpty(conn))
+            {
+                Console.WriteLine("Error: No se encontró la cadena de conexión 'InnovaFundingDb'. Revisa UserSecrets o variables de entorno.");
                 throw new InvalidOperationException("No se encontró la cadena de conexión 'InnovaFundingDb'. Revisa UserSecrets o variables de entorno.");
+
+            }
 
             return conn;
         }

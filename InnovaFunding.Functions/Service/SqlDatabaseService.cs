@@ -50,7 +50,7 @@ namespace InnovaFunding.Functions.Service
             command.Parameters.AddWithValue("@DatePublic", datePublic);
             command.Parameters.AddWithValue("@PriceSales", priceSales ?? 0);
             command.Parameters.AddWithValue("@Pricepurchase", pricePurchase ?? 0);
-            command.Parameters.AddWithValue("@CreatedDate", DateTime.UtcNow);
+            command.Parameters.AddWithValue("@CreatedDate", HelperExtensions.GetLocalDateTime());
             command.Parameters.AddWithValue("@ModifiedDate", HelperExtensions.GetLocalDateTime());
 
             await command.ExecuteNonQueryAsync();
@@ -67,7 +67,7 @@ namespace InnovaFunding.Functions.Service
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@ErrorMessage", message);
             command.Parameters.AddWithValue("@StackTrace", stackTrace ?? string.Empty);
-            command.Parameters.AddWithValue("@CreatedDate", DateTime.UtcNow);
+            command.Parameters.AddWithValue("@CreatedDate", HelperExtensions.GetLocalDateTime());
 
             await command.ExecuteNonQueryAsync();
         }

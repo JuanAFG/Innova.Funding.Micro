@@ -9,6 +9,7 @@ namespace InnovaFunding.Functions.Service
     public class SqlDatabaseService : IDatabaseService
     {
         private readonly IConfiguration _configuration;
+        private string connectionString = Environment.GetEnvironmentVariable("AzureConnection");
         public SqlDatabaseService(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -38,9 +39,9 @@ namespace InnovaFunding.Functions.Service
 
         public async Task InsertRateAsync(string datePublic, double? priceSales, double? pricePurchase)
         {
-            string _connectionString = _configuration.GetConnectionString("AzureConnection");
+            //string _connectionString = _configuration.GetConnectionString("AzureConnection");
 
-            using var connection = new SqlConnection(_connectionString);
+            using var connection = new SqlConnection(connectionString);
             await connection.OpenAsync();
 
             using var command = new SqlCommand("Up_InsertSunatExchangeRate", connection);
@@ -56,9 +57,9 @@ namespace InnovaFunding.Functions.Service
 
         public async Task LogErrorAsync(string message, string stackTrace)
         {
-            string _connectionString = _configuration.GetConnectionString("AzureConnection");
+            //string _connectionString = _configuration.GetConnectionString("AzureConnection");
 
-            using var connection = new SqlConnection(_connectionString);
+            using var connection = new SqlConnection(connectionString);
             await connection.OpenAsync();
 
             using var command = new SqlCommand("InsertErrorLog", connection);

@@ -1,5 +1,6 @@
 using InnovaFunding.Functions.Contract;
 using InnovaFunding.Functions.Logic;
+using InnovaFunding.Functions.Util;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
@@ -28,7 +29,7 @@ public class FunctionConsumerServiceSunat
         await scraper.InsertTipoCambioAsync();
 
         var response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteStringAsync($"[{DateTime.Now}] Tipo de cambio insertado correctamente.");
+        await response.WriteStringAsync($"[{HelperExtensions.GetLocalDateTime()}] Tipo de cambio insertado correctamente.");
 
         _logger.LogInformation("HTTP trigger ejecutado correctamente.");
         return response;

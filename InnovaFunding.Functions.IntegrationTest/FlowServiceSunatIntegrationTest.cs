@@ -75,7 +75,7 @@ namespace InnovaFunding.Functions.IntegrationTest
             await connection.OpenAsync();
 
             var command = new SqlCommand("SELECT TOP 1 ErrorMessage FROM ErrorLog ORDER BY CreatedDate DESC", connection);
-            var lastError = (string?)await command.ExecuteScalarAsync();
+            var lastError = (string)await command.ExecuteScalarAsync();
 
             Assert.NotNull(lastError);
             Assert.Contains("Response", lastError); // validación más flexible

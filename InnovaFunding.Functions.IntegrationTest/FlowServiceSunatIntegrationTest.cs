@@ -28,8 +28,8 @@ namespace InnovaFunding.Functions.IntegrationTest
 
             if (string.IsNullOrEmpty(conn))
             {
-                Console.WriteLine("Error: No se encontró la cadena de conexión 'InnovaFundingDb'. Revisa UserSecrets o variables de entorno.");
-                throw new InvalidOperationException("No se encontró la cadena de conexión 'InnovaFundingDb'. Revisa UserSecrets o variables de entorno.");
+                Console.WriteLine("Error: No se encontró la cadena de conexión 'AzureConnection'. Revisa UserSecrets o variables de entorno.");
+                throw new InvalidOperationException("No se encontró la cadena de conexión 'AzureConnection'. Revisa UserSecrets o variables de entorno.");
 
             }
 

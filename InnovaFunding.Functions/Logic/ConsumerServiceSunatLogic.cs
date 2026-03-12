@@ -45,8 +45,8 @@ namespace InnovaFunding.Functions.Logic
                 var today = DateTime.Now.Date.ToString("dd/MM/yyyy");
                 var typeChangeToday = tipoCambios.Where(x => x.fecPublica == today);
 
-                double? priceSales = null;
-                double? pricePurchase = null;
+                decimal? priceSales = null;
+                decimal? pricePurchase = null;
                 string fecPublica = today;
 
                 if (!typeChangeToday.Any())
@@ -61,9 +61,9 @@ namespace InnovaFunding.Functions.Logic
                     {
                         fecPublica = tipoCambio.fecPublica;
                         if (tipoCambio.codTipo == "V")
-                            priceSales = double.Parse(tipoCambio.valTipo, CultureInfo.InvariantCulture);
+                            priceSales = decimal.Parse(tipoCambio.valTipo, CultureInfo.InvariantCulture);
                         if (tipoCambio.codTipo == "C")
-                            pricePurchase = double.Parse(tipoCambio.valTipo, CultureInfo.InvariantCulture);
+                            pricePurchase = decimal.Parse(tipoCambio.valTipo, CultureInfo.InvariantCulture);
                     }
                 }
 

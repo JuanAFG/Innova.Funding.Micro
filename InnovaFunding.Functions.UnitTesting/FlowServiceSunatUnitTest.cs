@@ -47,7 +47,7 @@ public class FlowServiceSunatUnitTest
         await service.InsertTipoCambioAsync();
 
         // Assert
-        dbMockRun.Verify(d => d.InsertRateAsync(today, 3.85, 3.80), Times.Once);
+        dbMockRun.Verify(d => d.InsertRateAsync(today, 3.85m, 3.80m), Times.Once);
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public class FlowServiceSunatUnitTest
 
         var dbMock = new Mock<IDatabaseService>();
         dbMock.Setup(d => d.GetYesterdayRateAsync(yesterday))
-              .ReturnsAsync((3.70, 3.65));
+              .ReturnsAsync((3.70m, 3.65m));
 
         var service = new ConsumerServiceSunatLogic(httpClient, dbMock.Object, _url);
 
@@ -80,7 +80,7 @@ public class FlowServiceSunatUnitTest
         await service.InsertTipoCambioAsync();
 
         // Assert
-        dbMock.Verify(d => d.InsertRateAsync(It.IsAny<string>(), 3.70, 3.65), Times.Once);
+        dbMock.Verify(d => d.InsertRateAsync(It.IsAny<string>(), 3.70m, 3.65m), Times.Once);
     }
 
     [Fact]

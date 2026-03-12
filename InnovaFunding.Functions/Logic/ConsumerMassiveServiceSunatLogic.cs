@@ -65,13 +65,13 @@ namespace InnovaFunding.Functions.Logic
                             var compra = group.FirstOrDefault(x => x.codTipo == "C");
                             var venta = group.FirstOrDefault(x => x.codTipo == "V");
 
-                            double? pricePurchase = null;
-                            double? priceSales = null;
+                            decimal? pricePurchase = null;
+                            decimal? priceSales = null;
 
-                            if (compra != null && double.TryParse(compra.valTipo, NumberStyles.Any, CultureInfo.InvariantCulture, out var compraValue))
+                            if (compra != null && decimal.TryParse(compra.valTipo, NumberStyles.Any, CultureInfo.InvariantCulture, out var compraValue))
                                 pricePurchase = compraValue;
 
-                            if (venta != null && double.TryParse(venta.valTipo, NumberStyles.Any, CultureInfo.InvariantCulture, out var ventaValue))
+                            if (venta != null && decimal.TryParse(venta.valTipo, NumberStyles.Any, CultureInfo.InvariantCulture, out var ventaValue))
                                 priceSales = ventaValue;
 
                             await _databaseService.InsertRateAsync(

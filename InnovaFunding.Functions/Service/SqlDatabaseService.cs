@@ -16,7 +16,7 @@ namespace InnovaFunding.Functions.Service
             _configuration = configuration;
         }
 
-        public async Task<(double? PriceSales, double? PricePurchase)> GetYesterdayRateAsync(string date)
+        public async Task<(decimal? PriceSales, decimal? PricePurchase)> GetYesterdayRateAsync(string date)
         {
             string _connectionString = _configuration.GetConnectionString("AzureConnection");
             using var connection = new SqlConnection(_connectionString);
@@ -32,13 +32,13 @@ namespace InnovaFunding.Functions.Service
             using var reader = await command.ExecuteReaderAsync();
             if (await reader.ReadAsync())
             {
-                return (reader.GetDouble(0), reader.GetDouble(1));
+                return (reader.GetDecimal(0), reader.GetDecimal(1));
             }
 
             return (null, null);
         }
 
-        public async Task InsertRateAsync(string datePublic, double? priceSales, double? pricePurchase)
+        public async Task InsertRateAsync(string datePublic, decimal? priceSales, decimal? pricePurchase)
         {
             string _connectionString = _configuration.GetConnectionString("AzureConnection");
 
